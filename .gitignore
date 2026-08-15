@@ -4,3 +4,4 @@ _export/
 _extra/
 
 *.zip
+*.af~lock~
