@@ -8,7 +8,8 @@ Note : Pour la police "Hanover Colour RN", certaines déclinaisons avec la diago
 
 ## Fonctionnement
 
-__**Note générale**__ : Le nombre indiqué dans le nom des polices correspond à la hauteur maximale des caractères. Pour les polices EUROFONTS, seuls les deux premiers chiffres indiquent cette hauteur. Veillez à ce que la taille des points (LED) soit cohérente entre toutes les polices utilisées sur une même girouette, et n'utilisez pas une police inadaptée. Des explications plus détaillées sont disponibles dans les manuels.
+__**Note générale**__ : Le nombre indiqué dans le nom des polices correspond à la hauteur maximale des caractères. Pour les polices EUROFONTS, seuls les deux premiers chiffres indiquent cette hauteur. Veillez à ce que la taille des cercles (LED) soit cohérente entre toutes les polices utilisées sur une même girouette, et n'utilisez pas une police inadaptée. 
+Des explications plus détaillées sont disponibles dans les manuels.
 
 ### Girouette sans couleur :
 1. Accédez au dossier "signes_background/" et sélectionnez un sous-dossier. Le plus couramment utilisé est "externally_viewed_mono_led_signs".
