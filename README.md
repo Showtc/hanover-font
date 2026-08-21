@@ -30,6 +30,13 @@ Effet de contour :
 
 ## Caractères spéciaux
 
+### Hanover Colour RN
+
+- Fond plein : a
+- Fond ayant une diagonale : b
+
+### Autre
+
 Voir la documentation dans le dossier `docs`.
 
 ## Note
