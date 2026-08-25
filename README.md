@@ -28,6 +28,8 @@ Effet de contour :
 - Saisissez le texte souhaité en noir ou dans une couleur sombre.
 - Dupliquez ce texte, appliquez la variante "Regular" (version standard) de la police, et changez la couleur pour celle souhaitée.
 
+De plus voici une vidéo sur la création de griouettes avec ces polices sur PixelLab : [https://youtu.be/vTwoW1SZ-6I](https://youtu.be/vTwoW1SZ-6I)
+
 ## Caractères spéciaux
 
 ### Hanover Colour RN
