@@ -46,9 +46,10 @@ jobs:
             exit 1
           fi
 
-          perl -0777 -i -pe 's#(\Q${{ env.BEGIN_TAG }}\E)(?:.|\n)*?(\Q${{ env.END_TAG }}\E)#${1}\n[<img src="assets/github-stable.svg" alt="Download ${{ env.FORMAT }}" height="${{ env.HEIGHT }}">](https://github.com/${{ env.GITHUB_USER }}/${{ env.REPO }}/archive/${{ env.VERSION }}.${{ env.FORMAT }})\n${2}#g' README.md
+          # Utilisation de balises HTML pures <a> et <img> pour une compatibilité garantie avec GitHub
+          perl -0777 -i -pe 's#(\Q${{ env.BEGIN_TAG }}\E)(?:.|\n)*?(\Q${{ env.END_TAG }}\E)#${1}\n<a href="https://github.com/${{ env.GITHUB_USER }}/${{ env.REPO }}/archive/${{ env.VERSION }}.${{ env.FORMAT }}"><img src="assets/github-stable.svg" alt="Download ${{ env.FORMAT }}" height="${{ env.HEIGHT }}"></a>\n${2}#g' README.md
 
-          echo "Successfully updated README.md with version ${{ env.VERSION }}"
+          echo "Successfully updated README.md with version ${{ env.VERSION }} and height ${{ env.HEIGHT }}px"
 
       - name: Commit and push changes
         uses: EndBug/add-and-commit@v9
