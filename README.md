@@ -4,6 +4,7 @@
 
 Télécharger les polices
 <!-- BEGIN LATEST DOWNLOAD BUTTON -->
+[![Download zip](assets/github-stable.svg "Download zip")](https://github.com/Showtc/hanover-font/archive/v1.01.zip)
 <!-- END LATEST DOWNLOAD BUTTON -->
 
 </div>
