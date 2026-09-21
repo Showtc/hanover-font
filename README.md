@@ -3,8 +3,22 @@
 <img src="assets/banner.png" alt="Hanover fonts banner" height="500" />
 
 Télécharger les polices
-<!-- BEGIN LATEST DOWNLOAD BUTTON -->
-<!-- END LATEST DOWNLOAD BUTTON -->
+<table>
+  <tr>
+    <th align="center">Version publique (contient les fichiers otf, la documentation et les fonds)</th>
+    <th align="center">Version de développement (contient les scripts, les fichiers fnt et fichiers json)</th>
+  </tr>
+  <tr>
+    <td align="center">
+        <!-- BEGIN LATEST DOWNLOAD BUTTON -->
+        <!-- END LATEST DOWNLOAD BUTTON -->
+    </td>
+    <td align="center">
+      <a href="https://github.com/Showtc/hanover-font/archive/refs/heads/main.zip">
+        <img src="assets/github.svg" alt="Get Hanover fonts developer" height="90">
+      </a>
+    </td>
+  </tr>
 
 </div>
 
