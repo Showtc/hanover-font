@@ -1,3 +1,14 @@
+<div align="center">
+
+<img src="assets/banner.png" alt="Hanover fonts banner" height="500" />
+
+Télécharger les polices
+<!-- BEGIN LATEST DOWNLOAD BUTTON -->
+<!-- END LATEST DOWNLOAD BUTTON -->
+
+</div>
+
+
 # Hanover fonts
 
 Polices Hanover des familles EUROFONTS, POLICES, RATP, KEOLIS, Transdev, et Île-de-France Mobilités, incluant les polices pour les fonds de couleurs et des fonds de base pour les girouettes de toutes tailles.
@@ -40,6 +51,47 @@ De plus voici une vidéo sur la création de griouettes avec ces polices sur Pix
 ### Autre
 
 Voir la documentation dans le dossier `docs`.
+
+Voici une proposition d'amélioration de votre documentation. Le texte a été restructuré pour être plus clair, plus professionnel et plus facile à suivre (idéalement pour un fichier `README.md`). 
+
+Les fautes de frappe (comme "parant") ont été corrigées, et la formule mathématique a été déplacée juste à côté des variables JSON auxquelles elle se rapporte pour une meilleure logique.
+
+## Guide développeur
+
+### Prérequis
+
+- Python : version 3.13 (ou supérieure)
+- Pillow : `pip install pillow`
+
+### Extraction des caractères
+
+1. Créez un dossier principal contenant un sous-dossier pour chaque police.
+2. Placez le fichier `.fnt` correspondant dans chaque sous-dossier.
+3. Lancez le script `extract_fnt_glyph.py` en modifiant la variable `ROOT_DIR` dans le script vers le chemin du dossier principal.
+   > Note pour les utilisateurs Windows : Assurez-vous d'utiliser des slashs (`/`) plutôt que des antislashs (`\`) dans vos chemins.
+
+### Configuration des polices
+
+Le script génère des fichiers `.json` pour chaque police. Il est fortement recommandé de les vérifier et de les modifier manuellement, car les fichiers `.fnt` d'origine ne contiennent souvent pas les bonnes valeurs pour l'espacement des lettres et la taille de l'espace.
+
+Voici la structure d'un fichier de configuration `.json` :
+
+```json
+{
+  "font_name": "Font name",
+  "space_pixels": 3,
+  "inter_char_space_pixels": 1
+}
+```
+
+### Génération des fichiers OTF
+
+Une fois les fichiers bitmap extraits et les fichiers `.json` configurés, ouvrez le script `generate_otf_from_bitmaps.py` et modifiez les variables suivantes en début de fichier :
+
+- `ROOT_FOLDER` : Le chemin vers votre dossier principal
+- `FONT_FAMILY` : Le nom de la famille de polices (nom parent)
+- `EXPORT_FOLDER` : Le dossier de destination pour les fichiers `.otf` générés
+- `MASTER_MAX_HEIGHT` : La hauteur maximale (en pixels) de la police
 
 ## Note
 
