@@ -13,8 +13,6 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
-          # CRITICAL: Force checkout of the main branch.
-          # Without this, release triggers checkout the tag (detached HEAD), which cannot be pushed to.
           ref: main
 
       - name: Get release version
@@ -27,7 +25,7 @@ jobs:
           else
             LATEST_TAG=$(gh api repos/${{ github.repository }}/releases/latest --jq '.tag_name')
             if [ -z "$LATEST_TAG" ] || [ "$LATEST_TAG" = "null" ]; then
-              echo "Error: No releases found in the repository."
+              echo "❌ Error: No releases found in the repository."
               exit 1
             fi
             echo "VERSION=$LATEST_TAG" >> $GITHUB_OUTPUT
@@ -39,15 +37,16 @@ jobs:
           REPO: "hanover-font"
           FORMAT: "zip"
           VERSION: "${{ steps.get-version.outputs.VERSION }}"
+          HEIGHT: "90"
           BEGIN_TAG: "<!-- BEGIN LATEST DOWNLOAD BUTTON -->"
           END_TAG: "<!-- END LATEST DOWNLOAD BUTTON -->"
         run: |
           if [ -z "${{ env.VERSION }}" ]; then
-            echo "Error: VERSION is empty. Cannot update README."
+            echo "❌ Error: VERSION is empty. Cannot update README."
             exit 1
           fi
 
-          perl -0777 -i -pe 's#(\Q${{ env.BEGIN_TAG }}\E)(?:.|\n)*?(\Q${{ env.END_TAG }}\E)#${1}\n[![Download ${{ env.FORMAT }}](assets/github-stable.svg "Download ${{ env.FORMAT }}")](https://github.com/${{ env.GITHUB_USER }}/${{ env.REPO }}/archive/${{ env.VERSION }}.${{ env.FORMAT }})\n${2}#g' README.md
+          perl -0777 -i -pe 's#(\Q${{ env.BEGIN_TAG }}\E)(?:.|\n)*?(\Q${{ env.END_TAG }}\E)#${1}\n[<img src="assets/github-stable.svg" alt="Download ${{ env.FORMAT }}" height="${{ env.HEIGHT }}">](https://github.com/${{ env.GITHUB_USER }}/${{ env.REPO }}/archive/${{ env.VERSION }}.${{ env.FORMAT }})\n${2}#g' README.md
 
           echo "Successfully updated README.md with version ${{ env.VERSION }}"
 
@@ -56,5 +55,5 @@ jobs:
         with:
           message: "docs(readme): bump download button version to ${{ steps.get-version.outputs.VERSION }}"
           default_author: github_actions
-          token: ${{ github.token }} # Explicitly pass the token for authentication
+          token: ${{ github.token }}
           push: true
