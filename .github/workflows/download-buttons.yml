@@ -12,25 +12,24 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          # CRITICAL: Force checkout of the main branch.
+          # Without this, release triggers checkout the tag (detached HEAD), which cannot be pushed to.
+          ref: main
 
       - name: Get release version
         id: get-version
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          # 1. Use the release event tag if triggered by a release publication
           if [ -n "${{ github.event.release.tag_name }}" ]; then
             echo "VERSION=${{ github.event.release.tag_name }}" >> $GITHUB_OUTPUT
           else
-            # 2. Fallback for workflow_dispatch: fetch the latest release via GitHub API
             LATEST_TAG=$(gh api repos/${{ github.repository }}/releases/latest --jq '.tag_name')
-
-            # 3. Explicitly check if the API call failed or returned null
             if [ -z "$LATEST_TAG" ] || [ "$LATEST_TAG" = "null" ]; then
               echo "Error: No releases found in the repository."
               exit 1
             fi
-
             echo "VERSION=$LATEST_TAG" >> $GITHUB_OUTPUT
           fi
 
@@ -48,7 +47,6 @@ jobs:
             exit 1
           fi
 
-          # Use perl in-place (-i) with \Q...\E to safely escape literal strings in regex
           perl -0777 -i -pe 's#(\Q${{ env.BEGIN_TAG }}\E)(?:.|\n)*?(\Q${{ env.END_TAG }}\E)#${1}\n[![Download ${{ env.FORMAT }}](assets/github-stable.svg "Download ${{ env.FORMAT }}")](https://github.com/${{ env.GITHUB_USER }}/${{ env.REPO }}/archive/${{ env.VERSION }}.${{ env.FORMAT }})\n${2}#g' README.md
 
           echo "Successfully updated README.md with version ${{ env.VERSION }}"
@@ -58,4 +56,5 @@ jobs:
         with:
           message: "docs(readme): bump download button version to ${{ steps.get-version.outputs.VERSION }}"
           default_author: github_actions
-          branch: main
+          token: ${{ github.token }} # Explicitly pass the token for authentication
+          push: true
