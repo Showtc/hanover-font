@@ -11,7 +11,8 @@ Télécharger les polices
   <tr>
     <td align="center">
         <!-- BEGIN LATEST DOWNLOAD BUTTON -->
-        <!-- END LATEST DOWNLOAD BUTTON -->
+[<img src="assets/github-stable.svg" alt="Download zip" height="90">](https://github.com/Showtc/hanover-font/archive/v1.01.zip)
+<!-- END LATEST DOWNLOAD BUTTON -->
     </td>
     <td align="center">
       <a href="https://github.com/Showtc/hanover-font/archive/refs/heads/main.zip">
