@@ -15,12 +15,22 @@ jobs:
 
       - name: Get release version
         id: get-version
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: |
-          # Use the release event tag if available, otherwise fetch the latest via GitHub CLI
+          # 1. Use the release event tag if triggered by a release publication
           if [ -n "${{ github.event.release.tag_name }}" ]; then
             echo "VERSION=${{ github.event.release.tag_name }}" >> $GITHUB_OUTPUT
           else
-            LATEST_TAG=$(gh release list --limit 1 --json tagName --jq '.[0].tagName')
+            # 2. Fallback for workflow_dispatch: fetch the latest release via GitHub API
+            LATEST_TAG=$(gh api repos/${{ github.repository }}/releases/latest --jq '.tag_name')
+
+            # 3. Explicitly check if the API call failed or returned null
+            if [ -z "$LATEST_TAG" ] || [ "$LATEST_TAG" = "null" ]; then
+              echo "Error: No releases found in the repository."
+              exit 1
+            fi
+
             echo "VERSION=$LATEST_TAG" >> $GITHUB_OUTPUT
           fi
 
