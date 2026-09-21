@@ -19,6 +19,7 @@ Télécharger les polices
       </a>
     </td>
   </tr>
+</table>
 
 </div>
 
